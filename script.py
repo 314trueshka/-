@@ -1,33 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
-URL = "https://www.timeout.ru/msk/artwork/"
-HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'}
-FILMS_ID = 1000000
-rev = "/review"
-films = []
-def get_html(url, films_id):
-    r = requests.get(url + films_id,headers = HEADERS)
-    return r
-
-
-def get_html_rev(url, films_id):
-    r = requests.get(url + films_id + rev,headers = HEADERS)
-    return r
-
-def get_content(html):
-
-    soup = BeautifulSoup(html, 'html.parser')
-    items = soup.find_all('div', class_ = 'details-list')
-    photos = soup.find_all('img', class_ = 'photo__img')
-    names = soup.find_all('h1', class_='page-header__title')
-    name = ''
-    for i in names[0]:
-        name = i
-        films.append([name.replace("\n",'').strip()])
-    photo = str(photos[0])
-    image = ''
-    K = 0
-import requests
 import json
 from bs4 import BeautifulSoup
 
@@ -96,7 +67,10 @@ def get_content(html):
 def get_review(html_rev):
 
     soup = BeautifulSoup(html_rev, 'html.parser')
-    items = soup.find('div',class_ = 'article__text').get_text()
+    try:
+        items = soup.find('div',class_ = 'article__text').get_text()
+    except:
+        items = "None"
     film["description"] = items.replace("\xa0"," ").replace('\r\n'," ").replace('\r'," ").replace('\n',' ')
     films.append(film)
 
