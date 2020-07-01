@@ -7,7 +7,7 @@
 	<!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="/static/images/icons/favicon.ico"/>
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" v-for="link in linkhref" href="{{linkhref.link}}">
+	<link rel="stylesheet" type="text/css" v-for="links in linkhref" href="{{links.link}}">
 	<!--===============================================================================================-->
 	<!--===============================================================================================-->
 </head>
@@ -62,14 +62,15 @@
     	<script>
     	var app = new Vue({
         	el: '#app',
-        	data:[ {
-            	linkhref: '/static/css/bootstrap.min.css',
-            	linkhref: '/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css',
-            	linkhref: '/static/css/animate.css',
-            	linkhref: '/static/css/hamburgers.min.css',
-            	linkhref: '/static/css/select2.min.css',
-            	linkhref: '/static/css/util.css',
-            	linkhref: '/static/css/main.css',
+        	data:[ 
+        	linkhref:{
+            	link: '/static/css/bootstrap.min.css'},
+            	{link: '/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css'},
+            	{link: '/static/css/animate.css'},
+            	{link: '/static/css/hamburgers.min.css'},
+            	{link: '/static/css/select2.min.css'},
+            	{link: '/static/css/util.css'},
+            	{link: '/static/css/main.css',
                 	},
             	],
     		})
